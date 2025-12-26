@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body className={`font-sans antialiased`}>
         {children}
+        <Toaster richColors position="top-center" closeButton />
         <Analytics />
       </body>
     </html>
