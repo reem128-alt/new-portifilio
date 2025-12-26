@@ -62,12 +62,16 @@ export function Hero() {
                 : "opacity-0"
             }`}
           >
-            <Button size="lg" className="group">
-              View My Work
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <Button size="lg" className="group" asChild>
+              <a href="#projects">
+                View My Work
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline">
-              Download CV
+            <Button size="lg" variant="outline" asChild>
+              <a href="/Reem-cv.pdf" download>
+                Download CV
+              </a>
             </Button>
           </div>
 
