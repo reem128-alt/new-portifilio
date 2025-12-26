@@ -138,17 +138,19 @@ export function Contact() {
           {contactInfo.map((info, index) => (
             <Card
               key={index}
-              className={`p-6 text-center hover:border-primary hover:scale-105 transition-all ${
+              className={`p-6 text-center bg-card/80 border border-border/60 shadow-lg shadow-primary/5 hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 ${
                 isVisible
                   ? `animate-scaleIn animation-delay-${200 + index * 100}`
                   : ""
               }`}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4">
-                <info.icon className="h-6 w-6 text-primary" />
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-primary via-purple-500 to-primary text-white shadow-lg shadow-primary/40 mb-4">
+                <info.icon className="h-6 w-6" />
               </div>
-              <h3 className="font-semibold mb-2">{info.value}</h3>
-              
+              <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground/90 mb-2">
+                {info.title}
+              </p>
+              <h3 className="text-xl font-semibold text-foreground">{info.value}</h3>
             </Card>
           ))}
         </div>
