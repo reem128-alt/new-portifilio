@@ -1,51 +1,58 @@
-"use client"
+"use client";
 
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ExternalLink, Github, Laptop, Server } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  ExternalLink,
+  Github,
+  Laptop,
+  Server,
+  StickyNote,
+  X,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export function Projects() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-  const [openCodeIndex, setOpenCodeIndex] = useState<number | null>(null)
-  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [openCodeIndex, setOpenCodeIndex] = useState<number | null>(null);
+  const [openNoteIndex, setOpenNoteIndex] = useState<number | null>(null);
+  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
     return () => {
       if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
+        observer.unobserve(sectionRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (openCodeIndex === null) return
-      const wrapper = dropdownRefs.current[openCodeIndex]
+      if (openCodeIndex === null) return;
+      const wrapper = dropdownRefs.current[openCodeIndex];
       if (wrapper && !wrapper.contains(event.target as Node)) {
-        setOpenCodeIndex(null)
+        setOpenCodeIndex(null);
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [openCodeIndex])
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [openCodeIndex]);
 
   const projects = [
-   
     {
       title: "Polling system",
       description:
@@ -63,19 +70,20 @@ export function Projects() {
       description:
         "Reserve is booking platform that greets visitors with a polished marketing homepage highlighting quick reservations, premium spaces, and always-on support. Beyond the hero flow, it includes dedicated dashboards and auth flows for both general users and admins, indicating a full self-service experience once signed in.",
       image: "/reservation.png",
-      tags: ["Next", "Nest", "tailwind", "postgres","prisma"],
+      tags: ["Next", "Nest", "tailwind", "postgres", "prisma"],
       liveUrl: "https://reservation-murex.vercel.app/en",
       codeLinks: {
         frontend: "https://github.com/reem128-alt/Reservation",
         backend: "https://github.com/reem128-alt/reservation-back",
       },
+      note: "To explore the admin dashboard, sign in with EMAIL=demo@example.com and PASSWORD=demo1234.",
     },
     {
       title: "Health platform",
       description:
         "HealthCare is a patient-centric platform that highlights available doctors, services, and educational blog content to help users manage their healthcare journey. It emphasizes trusted medical expertise, transparent service offerings, and easy navigation for booking appointments or exploring",
       image: "/doctor.png",
-      tags: ["Next js","clerk","Tailwind", "Express", "Mongo db"],
+      tags: ["Next js", "clerk", "Tailwind", "Express", "Mongo db"],
       liveUrl: "https://health-care-qw9j.vercel.app",
       codeLinks: {
         frontend: "https://github.com/reem128-alt/health-care",
@@ -87,8 +95,8 @@ export function Projects() {
       description:
         "Social Blog is a members-only storytelling space where authenticated users share rich posts, manage profiles, and converse through comments. It blends a live social feed feel with lightweight moderation for small communities or teams.",
       image: "/weather-app-interface.png",
-      tags: ["Next js","Express","Tailwind", "Mongo db"],
-      liveUrl: "https://blog-one-virid-60.vercel.app",
+      tags: ["Next js", "Express", "Tailwind", "Mongo db"],
+      liveUrl: "https://blog-three-rho-16.vercel.app",
       codeLinks: {
         frontend: "https://github.com/reem128-alt/blog",
         backend: "https://github.com/reem128-alt/blog-backend",
@@ -99,32 +107,45 @@ export function Projects() {
       description:
         "Movie Dash is a centralized dashboard for curating a film catalog—admins can highlight featured titles, inspect detailed records, track performance metrics, and keep the library updated through secure add/edit flows.",
       image: "/move.png",
-      tags: ["Next js","Express","Tailwind","Mongo db"],
+      tags: ["Next js", "Express", "Tailwind", "Mongo db"],
       liveUrl: "https://movie-dash-front.vercel.app/",
       codeLinks: {
         frontend: "https://github.com/reem128-alt/movie-dash-front",
         backend: "https://github.com/reem128-alt/movie-dashboard",
       },
     },
-     {
+    {
       title: "chat App",
       description:
         "The repository hosts a user-facing chat portal where members log in, browse available rooms, and launch real-time conversations with others. It centers on presenting a welcoming dashboard that highlights personal info, room types, and quick actions to hop into active chats.",
       image: "/weather-app-interface.png",
-      tags: ["Next js","Zustand","Express","Tailwind","Mongo db","web socket"],
+      tags: [
+        "Next js",
+        "Zustand",
+        "Express",
+        "Tailwind",
+        "Mongo db",
+        "web socket",
+      ],
       liveUrl: "https://chat-app-front-phi.vercel.app/",
       codeLinks: {
         frontend: "https://github.com/reem128-alt/chat-app-front",
         backend: "https://github.com/reem128-alt/chat-app-back",
       },
     },
-  ]
+  ];
 
   return (
     <section id="projects" className="py-24 px-4" ref={sectionRef}>
       <div className="container mx-auto max-w-6xl">
-        <div className={`space-y-4 mb-16 text-center ${isVisible ? "animate-fadeIn" : ""}`}>
-          <h2 className="text-3xl md:text-5xl font-bold text-balance">Featured Projects</h2>
+        <div
+          className={`space-y-4 mb-16 text-center ${
+            isVisible ? "animate-fadeIn" : ""
+          }`}
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-balance">
+            Featured Projects
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             A selection of projects that showcase my skills and experience
           </p>
@@ -135,7 +156,9 @@ export function Projects() {
             <Card
               key={index}
               className={`relative flex flex-col h-full overflow-visible group border border-primary/10 bg-background/90 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all hover:scale-[1.02] ${
-                isVisible ? `animate-fadeIn animation-delay-${200 + index * 150}` : ""
+                isVisible
+                  ? `animate-fadeIn animation-delay-${200 + index * 150}`
+                  : ""
               }`}
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-primary via-purple-500 to-primary opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -151,7 +174,9 @@ export function Projects() {
                 <h3 className="text-xl font-bold bg-linear-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, idx) => (
                     <span
@@ -162,9 +187,13 @@ export function Projects() {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3 pt-2">
+                <div className="flex flex-wrap gap-3 pt-2">
                   <Button size="sm" variant="outline" asChild>
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Live Demo
                     </a>
@@ -172,13 +201,15 @@ export function Projects() {
                   <div
                     className="relative"
                     ref={(el) => {
-                      dropdownRefs.current[index] = el
+                      dropdownRefs.current[index] = el;
                     }}
                   >
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => setOpenCodeIndex(openCodeIndex === index ? null : index)}
+                      onClick={() =>
+                        setOpenCodeIndex(openCodeIndex === index ? null : index)
+                      }
                     >
                       <Github className="mr-2 h-4 w-4" />
                       Code
@@ -214,12 +245,57 @@ export function Projects() {
                       )}
                     </div>
                   </div>
+                  {project.note && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => setOpenNoteIndex(index)}
+                      className="flex items-center gap-2"
+                    >
+                      <StickyNote className="h-4 w-4" />
+                      Note
+                    </Button>
+                  )}
                 </div>
               </div>
             </Card>
           ))}
         </div>
       </div>
+      {openNoteIndex !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+          <div
+            className="absolute inset-0"
+            onClick={() => setOpenNoteIndex(null)}
+          />
+          <div className="relative z-10 w-full max-w-lg rounded-2xl border border-primary/10 bg-card p-8 shadow-2xl animate-fadeIn">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm uppercase tracking-wide text-primary/70">
+                  Project Note
+                </p>
+                <h4 className="text-2xl font-semibold text-balance">
+                  {projects[openNoteIndex].title}
+                </h4>
+              </div>
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => setOpenNoteIndex(null)}
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close note</span>
+              </Button>
+            </div>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              {projects[openNoteIndex].note}
+            </p>
+            <div className="mt-6 flex justify-end">
+              <Button onClick={() => setOpenNoteIndex(null)}>Close</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
-  )
+  );
 }
