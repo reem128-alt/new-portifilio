@@ -45,18 +45,7 @@ export function Projects() {
   }, [openCodeIndex])
 
   const projects = [
-    {
-      title: "Music app",
-      description:
-        "make this app using React,redux tookit and tailwind for designing ,i used Shazam core Api for fetching data like music ,top chart,artist",
-      image: "/music.png",
-      tags: ["React", "tailwind", "redux"],
-      liveUrl: "https://music-app-omega-one-73.vercel.app/",
-      codeLinks: {
-        frontend: "https://github.com/reem128-alt/music-app",
-        backend: "https://github.com/reem128-alt/music-app",
-      },
-    },
+   
     {
       title: "Polling system",
       description:
