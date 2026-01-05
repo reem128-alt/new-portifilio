@@ -8,11 +8,7 @@ import { useEffect, useState } from "react";
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
-  const roles = [
-     "Reem Hasan",
-     "IT Enginner",
-    "Full-Stack Developer"
-  ];
+  const roles = ["Reem Hasan", "IT Enginner", "Full-Stack Developer"];
 
   useEffect(() => {
     setIsVisible(true);
@@ -74,8 +70,6 @@ export function Hero() {
               </a>
             </Button>
           </div>
-
-          
         </div>
       </div>
     </section>

@@ -106,7 +106,7 @@ export function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+96392212227",
+      value: "+963992212227",
       
     },
     {
